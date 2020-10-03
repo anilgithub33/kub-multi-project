@@ -21,8 +21,10 @@ spec:
         app: sa-frontend                                  # 6
     spec:
       containers:
-        - image: basilvarghese/sa-frontend:2.0.0
+        - image: harbordevopsdoor.servebeer.com/development/sentiment-analysis-frontend:latest
           imagePullPolicy: Always                         # 7
           name: sa-frontend
           ports:
             - containerPort: 80
+      imagePullSecrets:
+        - name: harbor-jenkins-cred
