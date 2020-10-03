@@ -21,8 +21,10 @@ spec:
         app: sa-logic
     spec:
       containers:
-        - image: basilvarghese/sa-logic:2.0.0
+        - image: harbordevopsdoor.servebeer.com/development/sentiment-analysis-logic:latest
           imagePullPolicy: Always
           name: sa-logic
           ports:
             - containerPort: 5000
+      imagePullSecrets:
+        - name: harbor-jenkins-cred
