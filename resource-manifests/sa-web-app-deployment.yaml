@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sa-logic
+  name: sa-web-app
   labels:
-    app: sa-logic
+    app: sa-web-app
 spec:
   selector:
-     matchLabels:
-       app: sa-logic
+    matchLabels:
+      app: sa-web-app
   replicas: 2
   minReadySeconds: 15
   strategy:
@@ -18,13 +18,16 @@ spec:
   template:
     metadata:
       labels:
-        app: sa-logic
+        app: sa-web-app
     spec:
       containers:
-        - image: harbordevopsdoor.servebeer.com/development/sentiment-analysis-logic:latest
-          imagePullPolicy: Always
-          name: sa-logic
-          ports:
-            - containerPort: 5000
+      - image: harbordevopsdoor.servebeer.com/development/sentiment-analysis-web-app:latest
+        imagePullPolicy: Always
+        name: sa-web-app
+        env:
+          - name: SA_LOGIC_API_URL
+            value: "http://sa-logic"
+        ports:
+          - containerPort: 8080
       imagePullSecrets:
-        - name: harbor-jenkins-cred 
+      - name: harbor-jenkins-cred
